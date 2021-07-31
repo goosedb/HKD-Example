@@ -2,7 +2,7 @@
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE NamedFieldPuns #-}
 {-# LANGUAGE AllowAmbiguousTypes #-}
-module Test where
+module App where
 
 import Base.Create ( Create )
 import Base.Filter ( Filter )
@@ -27,8 +27,8 @@ import qualified Data.Aeson.Types as J
 
 type Handler = WithMongo => ActionM ()
 
-test :: IO ()
-test = do
+app :: IO ()
+app = do
   pipe <- Mongo.connect (Mongo.host "127.0.0.1")
   let ?pipe = pipe
   scotty 8000 do
