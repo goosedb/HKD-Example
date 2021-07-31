@@ -79,7 +79,7 @@ createArticle = do
         now <- getCurrentTime 
         dbCreate $ Article { created = now, modified = Nothing, .. }
       json articleID
-    Nothing -> text "User with such ID already exists"
+    Nothing -> text "User with such ID does not exist"
 
 updateArticle :: Handler
 updateArticle = do
