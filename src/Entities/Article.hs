@@ -36,12 +36,12 @@ import GHC.Generics ( Generic )
 
 
 data Article a = Article
-  { userID   :: Field "userID"   'Required a '[Immutable]                              (ID User)
-  , tags     :: Field "tags"     'Required a '[CustomFilter ItSelf]              (NonEmpty Text)
-  , title    :: Field "title"    'Required a '[CustomFilter Regex]                         Text
-  , content  :: Field "content"  'Required a '[CustomFilter NotFiltered]                   Text 
-  , created  :: Field "created"  'Required a '[CustomFilter Range, NotAllowedFromFront] UTCTime
-  , modified :: Field "modified" 'Optional a '[CustomFilter Range, NotAllowedFromFront] UTCTime }
+  { userID   :: Field "userID"   'Required a '[Immutable]                                     (ID User)
+  , tags     :: Field "tags"     'Required a '[CustomFilter ItSelf]                     (NonEmpty Text)
+  , title    :: Field "title"    'Required a '[CustomFilter Regex]                                Text
+  , content  :: Field "content"  'Required a '[CustomFilter NotFiltered]                          Text 
+  , created  :: Field "created"  'Required a '[CustomFilter Range, NotAllowedFromFront]        UTCTime
+  , modified :: Field "modified" 'Optional a '[CustomFilter Range, NotAllowedFromFront]        UTCTime }
   deriving stock Generic
 
 

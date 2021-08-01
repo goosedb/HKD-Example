@@ -30,11 +30,11 @@ import Front ( NotAllowedFromFront, Front )
 import GHC.Generics ( Generic )
 
 data Comment a = Comment
-  { userID    :: Field "userID"    'Required a '[Immutable]                                          (ID User)
-  , articleID :: Field "articleID" 'Required a '[Immutable]                                       (ID Article)
-  , content   :: Field "content"   'Required a '[CustomFilter NotFiltered]                               Text 
-  , created   :: Field "created"   'Required a '[Immutable, CustomFilter Range, NotAllowedFromFront ] UTCTime
-  , modified  :: Field "modified"  'Optional a '[CustomFilter Range, NotAllowedFromFront ]            UTCTime  }
+  { userID    :: Field "userID"    'Required a '[Immutable]                                             (ID User)
+  , articleID :: Field "articleID" 'Required a '[Immutable]                                          (ID Article)
+  , content   :: Field "content"   'Required a '[CustomFilter NotFiltered]                                  Text 
+  , created   :: Field "created"   'Required a '[Immutable, CustomFilter Range, NotAllowedFromFront]     UTCTime
+  , modified  :: Field "modified"  'Optional a '[CustomFilter Range, NotAllowedFromFront]                UTCTime }
   deriving stock Generic
 
 deriving instance (EmptyData (Comment Update))
