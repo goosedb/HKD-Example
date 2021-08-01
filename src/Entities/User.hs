@@ -62,7 +62,8 @@ instance ToDBFilter User where
     , applyFilter (optionalFilter rangeFilter modified) (modified user)
     , applyFilter (listFilter login) (login user)
     , applyFilter (optionalFilter listFilter email) (email user)
-    , applyFilter (existsFilter about) (about user) ]
+    , applyFilter (existsFilter about) (about user) 
+    ]
 
 instance ToDBFormat (User Create) where
   toDBFormat user = 

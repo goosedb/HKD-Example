@@ -76,7 +76,8 @@ instance ToDBFormat (Article Create) where
     , title    =:: title article
     , content  =:: content article
     , created  =:: created article
-    , modified =:: modified article ]
+    , modified =:: modified article 
+    ]
 
 instance ToDBFormat (Article Update) where
   toDBFormat article = catMaybes
@@ -84,7 +85,8 @@ instance ToDBFormat (Article Update) where
     , title    =::? title article
     , content  =::? content article
     , created  =::? created article
-    , modified =::? modified article ]
+    , modified =::? modified article 
+    ]
 
 instance FromDBFormat Article where
   fromDBFormat doc = Article
