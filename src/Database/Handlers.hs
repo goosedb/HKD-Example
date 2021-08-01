@@ -1,6 +1,5 @@
 module Database.Handlers where
 
-
 import Base.Create ( Create )
 import Base.Filter ( Filter )
 import Base.Schema ( nameOf )
@@ -54,9 +53,9 @@ dbDelete eID = runMongo $ Mongo.delete $
   Mongo.select [ nameOf (entityID @e) =: idVal eID ] (collection @e)
 
 buildQuery :: forall e. DBEntity e => Entity e Filter -> Mongo.Document
-buildQuery e = let ?prefix = [] in 
+buildQuery e =
   [ "$and" =: Mongo.Array [Mongo.Doc $ idsFilter (entityID e) <> toDBFilter (entity e)]
   ]
 
 runMongo :: WithMongo => Mongo.Action IO a -> IO a
-runMongo = Mongo.access ?pipe Mongo.master "hello"
+runMongo = Mongo.access ?pipe Mongo.master ?database

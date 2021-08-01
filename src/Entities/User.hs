@@ -20,14 +20,13 @@ import Database.Filters
       optionalFilter,
       applyFilter,
       existsFilter )
+import Database.Utils ( (=::), (=::?) )
 import Database.MongoDB ((=:))
 import Database.Types
     ( DBEntity(..),
       FromDBFormat(..),
       ToDBFormat(..),
       ToDBFilter(..),
-      (=::),
-      (=::?),
       get )
 import Filters ( Range )
 import Front ( NotAllowedFromFront, Front )

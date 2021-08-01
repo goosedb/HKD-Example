@@ -19,9 +19,8 @@ import Database.Types
       FromDBFormat(..),
       ToDBFormat(..),
       ToDBFilter(..),
-      (=::),
-      (=::?),
       get )
+import Database.Utils ( (=::), (=::?) )
 import Database.Filters
     ( regexFilter,
       rangeFilter,

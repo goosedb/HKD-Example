@@ -14,14 +14,14 @@ import Data.Maybe ( catMaybes )
 import Data.Text ( Text )
 import Data.Time ( UTCTime )
 import Database.Filters
+    ( rangeFilter, foreignIDsFilter, optionalFilter, applyFilter )
+import Database.Utils ( (=::), (=::?) )
 import Database.Types
     ( ID(..),
       DBEntity(..),
       FromDBFormat(..),
       ToDBFormat(..),
       ToDBFilter(..),
-      (=::),
-      (=::?),
       get ) 
 import Entities.Article ( Article )
 import Entities.User ( User )

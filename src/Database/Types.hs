@@ -10,20 +10,17 @@ import Data.Aeson qualified as J
 import Data.Aeson.Types qualified as J
 import Data.Generics.Labels qualified as GL
 import Data.Generics.Product.Fields qualified as GL
-import Data.Text ( pack, unpack ) 
+import Data.Text ( pack, unpack, Text ) 
 import Database.MongoDB qualified as Mongo
 import Database.MongoDB ( (=:) ) 
 import GHC.Generics ( Generic )
 import GHC.TypeLits ( KnownSymbol )
 import Text.Read ( readMaybe )
 
-type Prefix = [Mongo.Label]
-type WithPrefix = (?prefix :: Prefix)
-
 type DBFilter = [Mongo.Field]
 type DBDocument = Mongo.Document 
 
-type WithMongo = (?pipe :: Mongo.Pipe)
+type WithMongo = (?pipe :: Mongo.Pipe, ?database :: Text)
 
 newtype ID (a :: * -> *) = ID { idVal :: Mongo.ObjectId }
   deriving stock (Show, Read, Generic)
@@ -59,7 +56,7 @@ type family NamedID n a e :: * where
   NamedID n a      e =    ID e
 
 class ToDBFilter a where
-  toDBFilter :: WithPrefix => a Filter -> DBFilter
+  toDBFilter :: a Filter -> DBFilter
 
 class ToDBFormat a where
   toDBFormat :: a -> DBDocument
@@ -82,12 +79,5 @@ class
   ) => DBEntity a where
   collection :: Mongo.Collection 
 
-(=::) :: KnownSymbol s => Mongo.Val b => (a Schema -> Named s) -> b -> Mongo.Field
-(=::) field val = nameOf field =: val
-
-(=::?) :: KnownSymbol s => Mongo.Val b => (a Schema -> Named s) -> Maybe b -> Maybe Mongo.Field
-(=::?) field (Just val) = Just $ field =:: val
-(=::?) field Nothing = Nothing
-
 get :: MonadFail m => KnownSymbol s => Mongo.Val b => (a Schema -> Named s) -> Mongo.Document -> m b
-get field  = Mongo.lookup (nameOf field)
+get field = Mongo.lookup (nameOf field) 

@@ -31,6 +31,7 @@ app :: IO ()
 app = do
   pipe <- Mongo.connect (Mongo.host "127.0.0.1")
   let ?pipe = pipe
+  let ?database = "database"
   scotty 8000 do
     userHandlers
     articleHandlers
