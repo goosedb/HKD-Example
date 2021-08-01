@@ -41,8 +41,8 @@ data User a = User
   , about      :: Field "about"      'Optional a '[CustomFilter NotFiltered]                              Text }
   deriving stock Generic
 
-deriving instance (EmptyData (User Update))
-deriving instance (EmptyData (User Filter))
+deriving instance EmptyData (User Update)
+deriving instance EmptyData (User Filter)
 deriving instance J.FromJSON (User (Front Create))
 deriving instance J.FromJSON (User (Front Update))
 deriving instance J.FromJSON (User Filter)
